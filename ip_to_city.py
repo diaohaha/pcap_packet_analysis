@@ -28,7 +28,9 @@ def ip_to_city(ip):
     
     gi = pygeoip.GeoIP(ipfile, pygeoip.MEMORY_CACHE)
     record = gi.record_by_addr(ip)
+    if record == None:
+		return {'country_name':None}
     return record
 
 if __name__=="__main__" :
-    print ip_to_city('20.1.20.13')	
+    print ip_to_city('10.1.20.13')	

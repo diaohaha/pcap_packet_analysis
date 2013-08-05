@@ -33,17 +33,19 @@ def main():
         pdf.ln(10)
         pdf.cell(70,20,"num:"+str(hosts[top_hosts[i-1]]['num']))
         pdf.ln(10)
+        pdf.cell(70,20,"start static time:"+str(hosts[top_hosts[i-1]]['start_time']))
+        pdf.ln(10)
+        pdf.cell(70,20,"end static time:"+str(hosts[top_hosts[i-1]]['start_time']))
+        pdf.ln(10)
+        pdf.cell(70,20,"flow:"+str(hosts[top_hosts[i-1]]['flow']))
+        pdf.ln(10)
         pdf.cell(70,20,"visitors:")
         pdf.set_font('Arial','B',10)
         for visitor in hosts[top_hosts[i-1]]['visitors']:
             pdf.ln(7)
-            print visitor
-            pdf.cell(200,20,"     time:"+time.strftime('%Y-%m-%d',time.localtime(float(visitor[0])))+"     ip"+str(visitor[1])+"     city:"+str(visitor[2:3]))
+            pdf.cell(200,20,"     time: "+time.strftime('%Y-%m-%d',time.localtime(float(visitor[0])))+"     ip: "+str(visitor[1])+"     city: gd"+str(visitor[2]))
     pdf.output('results.pdf','F')
     
-    #for http_data in http_datas:
-     #   print http_data['srcip']
-      #  print ip_to_city(http_data['srcip'])
 
 if __name__ == "__main__":    
     main()  
