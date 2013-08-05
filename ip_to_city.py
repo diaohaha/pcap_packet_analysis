@@ -1,5 +1,6 @@
 # coding: utf-8
 import pygeoip
+import re
 '''
 返回的数据格式如下：
 {'city': 'Falls Church', 'region_name': 'VA', 'area_code': 703, 'time_zone': 'America/New_York', 
@@ -11,10 +12,10 @@ import pygeoip
 def test_ip_format(ip):
     '''test the ip format
     '''
-    ipRex = '((?:(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d)))\.){3}(?:25[0-5]|2[0-4]\d|((1\d{2})|([1-9]?\d))))'
+    ipRex = '^([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])\.([01]?\d\d?|2[0-4]\d|25[0-5])$'
     tmp = re.findall(re.compile(ipRex),ip)
     if not tmp:
-        return False
+        return False  
     return True	
     
     
@@ -33,4 +34,8 @@ def ip_to_city(ip):
     return record
 
 if __name__=="__main__" :
-    print ip_to_city('10.1.20.13')	
+    ip = '113.111.60.3'
+    if test_ip_format(ip):
+        print ip_to_city(ip)
+    else:
+		print "format error of ip"    	
