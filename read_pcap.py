@@ -43,8 +43,9 @@ def read_pcap(fpcap):
                         meta["host"] = http.headers['host']
                         meta["packet_size"] = ip.len
                         meta["srcip"] = addr2str(ip.src)
+                        meta["dstip"] = addr2str(ip.dst)
                         meta["time"] = ts
-                        http_data.append(meta)
+                        http_data.append(meta.copy())
                     except:
                         pass
     return http_data                        
@@ -57,8 +58,8 @@ if __name__ == "__main__":
     pcapfile = config.get('file', 'pcapfile', 0)
     fpcap = file(pcapfile,"rb")
     http = read_pcap(fpcap)
+    #http =[{'a':1,'b':2},{'a':2,'b':2}]
     i=0
-    for h in http:
-        i+=1
-        print h
-    print i    
+    ftxt = open('result.txt','w')
+    print http
+    ftxt.close()    
